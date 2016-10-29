@@ -1,8 +1,8 @@
 import "mocha";
 import "chai";
 import { expect } from "chai";
-import { Scanner } from "../lib/scanner";
-import { createScannerByDts } from "../lib/util";
+import { Scanner } from "../lib/Scanner";
+import { createScannerByDts } from "../lib/Util";
 
 describe("Scanner", () => {
     let scanner: Scanner;
@@ -41,6 +41,16 @@ describe("Scanner", () => {
 
         it("one remove position", () => {
             createScanner("/* types-patch:remove */");
+            scanner.scan();
+            expect(scanner.removePositions).to.eql([0]);
+            expect(scanner.removeRanges).to.eql([]);
+        });
+
+        it("one remove position with statement", () => {
+            createScanner(`
+            /* types-patch:remove */
+            export = () => string;
+            `);
             scanner.scan();
             expect(scanner.removePositions).to.eql([0]);
             expect(scanner.removeRanges).to.eql([]);

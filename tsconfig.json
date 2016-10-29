@@ -11,7 +11,7 @@
         "outDir": "bin"
     },
     "include": [
-        "lib/*.ts",
-        "tests/*.ts"
+        "lib/**/*.ts",
+        "tests/**/*.ts"
     ]
 }
